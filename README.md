@@ -1,4 +1,4 @@
-# ✈️ Flight Radar 2024 - Real-Time Flight Tracking Pipeline
+# ✈️ Flight Radar 2025 - Real-Time Flight Tracking Pipeline
 
 This project simulates a **real-time flight tracking system** (similar to AirRadar 2024) using a modern data engineering pipeline.  
 It generates fake flight events, streams them through Kafka, processes with Spark, stores in PostgreSQL, and visualizes with Streamlit.
@@ -17,75 +17,6 @@ It generates fake flight events, streams them through Kafka, processes with Spar
 ---
 
 
-## ▶️ How to Run
-
-1. **Start the environment**
-   ```bash
-   docker-compose up -d
-   ```
-
-2. **Check containers**
-   ```bash
-   docker ps
-   ```
-
-3. **Run the data producer**
-   - Open the `script/producer.ipynb` notebook in **Anaconda environment**  
-   - Run it to generate fake flights data and send events to Kafka topic `flights`.
-
-4. **Verify Kafka topic**
-   - Open **Kafka UI** in your browser  at [http://localhost:8090](http://localhost:8090)  
-   - Check that topic `flights` is receiving messages  
-
-5. **Check PostgreSQL**
-   - Open **pgAdmin** at [http://localhost:8085](http://localhost:8085)  
-   - Login with:  
-     - Email: `admin@admin.com`  
-     - Password: `admin`  
-
-6. **Create PostgreSQL Connection**
-   - In pgAdmin, create a new server connection:
-     - **Name**: `postgres_general`  
-     - **Host**: `postgres`  
-     - **Port**: `5432`  
-     - **Username**: `admin`  
-     - **Password**: `admin`  
-
-7. **Create Database**
-   - Open **Query Tool** in pgAdmin and run:
-     ```sql
-     CREATE DATABASE flights_project;
-     ```
-
-8. **Create Flights Table**
-   - Connect to the `flights_project` database and run:
-     ```sql
-     CREATE TABLE flights (
-         flight_id VARCHAR PRIMARY KEY,
-         origin TEXT,
-         destination TEXT,
-         status TEXT,
-         departure_time BIGINT,
-         arrival_time BIGINT
-     );
-     ```
-
-9. **Run Spark Script**
-   - Open the `scripts` folder and copy the Spark script into a Jupyter Notebook.  
-   - Access Jupyter at [http://localhost:8888](http://localhost:8888).  
-   - Before running the script, install PostgreSQL driver:
-     ```bash
-     pip install psycopg2-binary
-     ```
-   - Run the notebook and confirm that records are being inserted into PostgreSQL.  
-
-10. **View Dashboard**
-   - Open the Streamlit app at [http://localhost:8501](http://localhost:8501)  
-   - Explore the **real-time flights map** and **flight statuses**.  
-
----
-
-## 📊 Data Flow
 
 ```
 [ Python Producer (Faker) ]
@@ -117,19 +48,17 @@ It generates fake flight events, streams them through Kafka, processes with Spar
 
 ---
 
-## 🧹 Clean up
-
-To stop and remove containers, volumes, and networks:
-
-```bash
-docker-compose down -v
-```
-
----
-
 ## 📌 Notes
 
 - Kafka topic: **`flights`**  
 - Postgres DB: **flights_project**  
 - Streamlit UI shows flight map with status colors (On Time / Delayed / Cancelled).  
-- All services are containerized and orchestrated via **Docker Compose**.  
+- All services are containerized and orchestrated via **Docker Compose**.
+
+<div>
+<img width="300" alt="Image" src="https://github.com/user-attachments/assets/d4c87ed2-0448-4dd4-a212-8598ae06909a" />
+<img width="300" alt="Image" src="https://github.com/user-attachments/assets/28886725-02a4-4561-b1b0-06ba81efad5c" />
+<img width="300" alt="Image" src="https://github.com/user-attachments/assets/65422da4-c41e-439b-b4bf-9a1f43ce7f47" />
+<img width="300" alt="Image" src="https://github.com/user-attachments/assets/c4ecb565-d1ae-423b-97f7-0c1395b489bf" />
+</div>
+
